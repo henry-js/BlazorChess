@@ -1,0 +1,24 @@
+@page "/uiboard"
+
+@using BlazorChess.Data
+@inject ChessLibraryHelper chessHelper
+
+<div class="grid-container">
+    @{
+        for (int y = 8 - 1; y >= 0; y--)
+        {
+            for (int x = 0; x < 8; x++)
+            {
+                <CellComponent cell="@(boardState[x,y])"></CellComponent>
+            }
+        }
+    }
+</div>
+@code {
+    Cell[,]? boardState;
+
+    protected override void OnInitialized()
+    {
+        boardState = chessHelper.GetBoardState();
+    }
+}
