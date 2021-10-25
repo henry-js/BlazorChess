@@ -9,6 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<ChessLibraryHelper>();
+builder.Services.AddSingleton<ChessBoard>();
 
 var app = builder.Build();
 

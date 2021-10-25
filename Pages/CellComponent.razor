@@ -1,6 +1,11 @@
-<div class="grid-item">@cell.CellNumber, (@cell.File, @cell.Rank)</div>
+<div class="grid-item @cell.Colour">
+    <div>@(cell?.ChessPiece?.Name)</div>
+</div>
 
 @code {
     [Parameter]
     public Cell cell { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
 }

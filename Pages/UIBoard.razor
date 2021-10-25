@@ -2,6 +2,9 @@
 
 @using BlazorChess.Data
 @inject ChessLibraryHelper chessHelper
+@inject ChessBoard injectedChessBoard
+
+<button class="btn btn-primary" @onclick="PlacePiece">Click me</button>
 
 <div class="grid-container">
     @{
@@ -9,16 +12,22 @@
         {
             for (int x = 0; x < 8; x++)
             {
-                <CellComponent cell="@(boardState[x,y])"></CellComponent>
+                <CellComponent cell="@(injectedChessBoard.BoardState[x,y])"></CellComponent>
             }
         }
     }
 </div>
 @code {
-    Cell[,]? boardState;
+    Cell[,] boardState;
 
     protected override void OnInitialized()
     {
         boardState = chessHelper.GetBoardState();
+        injectedChessBoard.Init();
     }
+    public void PlacePiece()
+    {
+        injectedChessBoard.PlacePiece(3, 4, new King(ConsoleColor.Black));
+    }
+
 }

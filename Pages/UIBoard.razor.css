@@ -1,4 +1,31 @@
 /* custom */
 .grid-container {
   display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(8, 1fr);
+  /* border: 1px solid brown; */
+  gap: 0px;
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    /* max-height: 300px; */
+  }
+}
+
+::deep .grid-item {
+  aspect-ratio: 1 /1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border: 1px solid brown;
+  border-collapse: collapse;
+}
+
+::deep .White {
+  background-color: white;
+}
+
+::deep .Black {
+  /* background-color: black; */
 }
