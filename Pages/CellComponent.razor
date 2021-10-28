@@ -1,5 +1,13 @@
-<div class="grid-item @cell.Colour">
-    <div>@(cell?.ChessPiece?.Name)</div>
+<div class="grid-item @color" @onclick="@(() => OnClick.InvokeAsync(cell.Position))">
+    @{
+    }
+    @if (cell.ChessPiece is not null)
+    {
+        string? colourPrefix = cell?.ChessPiece?.Colour.ToString().ToLower().Substring(0, 1);
+        string? name = cell?.ChessPiece?.Name.ToLower();
+        string svgPath = $"images/chesspieces/{colourPrefix}{name}.svg";
+        <img src="@svgPath" alt="">
+    }
 </div>
 
 @code {
@@ -8,4 +16,18 @@
 
     [Parameter]
     public EventCallback<string> OnClick { get; set; }
+    private ConsoleColor color;
+
+    protected override void OnInitialized()
+    {
+        if (cell.IsLegal)
+        {
+            color = ConsoleColor.DarkGreen;
+        }
+        else
+        {
+            color = cell.Colour;
+        }
+    }
+    protected override OnR
 }

@@ -12,7 +12,7 @@
         {
             for (int x = 0; x < 8; x++)
             {
-                <CellComponent cell="@(injectedChessBoard.BoardState[x,y])"></CellComponent>
+                <CellComponent cell="@(injectedChessBoard.BoardState[x,y])" OnClick="@GetLegalMoves"></CellComponent>
             }
         }
     }
@@ -22,12 +22,22 @@
 
     protected override void OnInitialized()
     {
-        boardState = chessHelper.GetBoardState();
         injectedChessBoard.Init();
     }
     public void PlacePiece()
     {
         injectedChessBoard.PlacePiece(3, 4, new King(ConsoleColor.Black));
+    }
+    private void GetLegalMoves(string position)
+    {
+        var splitString = position.ToCharArray();
+        var file = splitString[0].ToString();
+        var rank = splitString[1].ToString();
+        var x = (int)Enum.Parse<ChessLibrary.File>(file, true);
+        int y = int.Parse(rank);
+        Console.WriteLine(position);
+        injectedChessBoard.GetLegalMoves(x, y);
+        StateHasChanged();
     }
 
 }
